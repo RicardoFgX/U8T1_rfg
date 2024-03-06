@@ -1,0 +1,24 @@
+<!-- consultapaises.component.html -->
+<div>
+  <label for="continentes">Selecciona un continente:</label>
+  <select id="continentes" [(ngModel)]="continenteSeleccionado">
+    <option value="europe">Europa</option>
+    <option value="africa">África</option>
+    <option value="americas">Américas</option>
+    <option value="asia">Asia</option>
+    <option value="oceania">Oceanía</option>
+  </select>
+  <button (click)="obtenerPaisesPorContinente()">Buscar</button>
+</div>
+
+<div *ngIf="paises.length > 0">
+  <div *ngFor="let pais of paises">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">{{ pais.name.common }}</h5>
+        <p class="card-text">Capital: {{ pais.capital[0] }}</p>
+        <img [src]="pais.flags.png" alt="Bandera de {{ pais.name.common }}">
+      </div>
+    </div>
+  </div>
+</div>
