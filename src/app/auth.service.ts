@@ -42,4 +42,15 @@ export class AuthService {
         }
       );
   }
+
+  loginToken2(): Observable<any> {
+    const token = localStorage.getItem('token');
+
+    const cabecera = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
+
+    return this.http.get('api/ejemplo/u8t3', { headers: cabecera });
+  }
 }

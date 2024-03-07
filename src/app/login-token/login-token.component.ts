@@ -37,4 +37,15 @@ export class LoginTokenComponent {
   pruebaToken(): void {
     this.authService.loginToken();
   }
+  
+  pruebaToken2(): void {
+    this.authService.loginToken2().subscribe(
+      response => {
+        console.log('Solicitud exitosa:', response);
+      },
+      error => {
+        console.error('Error en la solicitud (Esto probablemente es porque voy a una pagina que no existe):', error);
+      }
+    );
+  }
 }
