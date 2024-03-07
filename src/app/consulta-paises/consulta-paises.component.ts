@@ -15,7 +15,7 @@ export class ConsultaPaisesComponent {
   paises: any[] = [];
 
   constructor(private consultapaisesService: ConsultaPaisesService) {}
-
+  
   obtenerPaisesPorContinente() {
     this.consultapaisesService
       .getPaisesPorContinente(this.continenteSeleccionado)
