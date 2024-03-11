@@ -32,7 +32,7 @@ export class AuthService {
       'Authorization': `Bearer ${token}`
     });
 
-    this.http.get('/banderas', { headers: cabecera })
+    this.http.get('/api/ejemplo/u8t3', { headers: cabecera })
       .subscribe({
         next: (resp) => {
           console.log('Solicitud exitosa:', resp);
