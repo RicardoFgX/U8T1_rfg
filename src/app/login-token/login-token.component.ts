@@ -16,36 +16,50 @@ export class LoginTokenComponent {
   token: string = '';
   pista: string = 'eve.holt@reqres.in'
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService) { }
 
   onSubmit(): void {
-    this.authService.login(this.email, this.password).subscribe(
-      (response) => {
-        //Pilla el token
-        console.log(response.token);
-        this.token = response.token;
+    this.authService.login(this.email, this.password).subscribe({
+      next: (resp) => {
+        // Pilla el token
+        console.log(resp.token);
+        this.token = resp.token;
 
-        //Lo guardo en local
+        // Lo guardo en local
         localStorage.setItem('token', this.token);
       },
-      (error) => {
+      error: (error) => {
         console.error('Error de autenticación:', error);
+        /*
+        Swal.fire([
+          title: "Error en la peticion"
+          text: "No hemos podido conectar"
+          icon: "error"
+        ])
+        */
+      },
+      complete: () => {
+        console.log('He terminado la petición')
       }
-    );
+    });
   }
+
 
   pruebaToken(): void {
     this.authService.loginToken();
   }
-  
+
   pruebaToken2(): void {
-    this.authService.loginToken2().subscribe(
-      response => {
-        console.log('Solicitud exitosa:', response);
+    this.authService.loginToken2().subscribe({
+      next: (resp) => {
+        console.log('Solicitud exitosa:', resp);
       },
-      error => {
+      error: (error) => {
         console.error('Error en la solicitud (Esto probablemente es porque voy a una pagina que no existe):', error);
+      },
+      complete: () => {
+        console.log('He terminado la petición')
       }
-    );
+    });
   }
 }

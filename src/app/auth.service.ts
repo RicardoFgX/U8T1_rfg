@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 export class AuthService {
   private apiUrl = 'https://reqres.in/api/login';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   login(email: string, password: string): Observable<any> {
     const body = {
@@ -32,15 +32,18 @@ export class AuthService {
       'Authorization': `Bearer ${token}`
     });
 
-    this.http.get('api/ejemplo/u8t3', { headers: cabecera })
-      .subscribe(
-        response => {
-          console.log('Solicitud exitosa:', response);
+    this.http.get('/banderas', { headers: cabecera })
+      .subscribe({
+        next: (resp) => {
+          console.log('Solicitud exitosa:', resp);
         },
-        error => {
+        error: (error) => {
           console.error('Error en la solicitud (Esto probablemente es porque voy a una pagina que no existe):', error);
+        },
+        complete: () => {
+          console.log('He terminado la peticion para logueo con token1')
         }
-      );
+      });
   }
 
   loginToken2(): Observable<any> {
